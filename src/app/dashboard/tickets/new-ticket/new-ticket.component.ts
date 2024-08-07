@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   viewChild,
@@ -17,9 +18,14 @@ import { ControlComponent } from '../../../shared/control/control.component';
   templateUrl: './new-ticket.component.html',
   styleUrl: './new-ticket.component.css',
 })
-export class NewTicketComponent {
+export class NewTicketComponent implements AfterViewInit {
   // @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+
+  ngAfterViewInit() {
+    console.log('after view init');
+    console.log(this.form().nativeElement);
+  }
 
   onSubmit(title: string, ticketText: string) {
     this.form().nativeElement.reset();
